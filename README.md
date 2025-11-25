@@ -1,0 +1,1 @@
+Maybe helpful: https://github.com/vorpalhex/srd_spells/blob/master/spells.json 
