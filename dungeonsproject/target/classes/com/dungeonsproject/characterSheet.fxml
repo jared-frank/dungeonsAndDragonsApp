@@ -35,6 +35,7 @@
       <columnConstraints>
          <ColumnConstraints halignment="RIGHT" minWidth="40"/>
          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+         <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS"/>
       </columnConstraints>
 
       <VBox spacing="10" GridPane.columnIndex="0">
@@ -71,6 +72,64 @@
       </VBox>
 
       <VBox alignment="CENTER" spacing="20" GridPane.columnIndex="1">
+         <GridPane hgap="10" vgap="6">
+            <Label text="Acrobatics:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="acrobaticsSkill" text="--" GridPane.columnIndex="1"  GridPane.rowIndex="0"/>
+
+            <Label text= "Animal Handling:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="animalHandlingSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text= "Arcana:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="arcanaSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text= "Athletics:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="athleticsSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text= "Deception:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <Label fx:id="deceptionSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text= "History:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <Label fx:id="historySkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text= "Insight:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <Label fx:id="insightSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <Label text= "Intimidation:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+            <Label fx:id="intimidationSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+            <Label text= "Investigation:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+            <Label fx:id="investigationSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+            <Label text= "Medicine:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+            <Label fx:id="medicineSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+
+            <Label text= "Nature:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+            <Label fx:id="natureSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+
+            <Label text= "Perception:" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
+            <Label fx:id="perceptionSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+
+            <Label text= "Performance:" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+            <Label fx:id="performanceSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+
+            <Label text= "Persuasion:" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+            <Label fx:id="persuasionSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+
+            <Label text= "Religion:" GridPane.columnIndex="0" GridPane.rowIndex="14"/>
+            <Label fx:id="religionSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+
+            <Label text= "Sleight of Hand:" GridPane.columnIndex="0" GridPane.rowIndex="15"/>
+            <Label fx:id="sleightOfHandSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+
+            <Label text= "Stealth:" GridPane.columnIndex="0" GridPane.rowIndex="16"/>
+            <Label fx:id="stealthSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+
+            <Label text= "Survival:" GridPane.columnIndex="0" GridPane.rowIndex="17"/>
+            <Label fx:id="survivalSkill" text="--" GridPane.columnIndex="1" GridPane.rowIndex="17"/>
+         </GridPane>
+      </VBox>
+
+      <VBox alignment="CENTER" GridPane.columnIndex="2">
          <Label fx:id="currentHpLabel" text="Current HP: --"/>
          <TextField fx:id="hpInput" promptText="Enter amount" maxWidth="80" alignment="CENTER"/>
          <Button text="Take Damage" onAction="#onDamageClick"/>

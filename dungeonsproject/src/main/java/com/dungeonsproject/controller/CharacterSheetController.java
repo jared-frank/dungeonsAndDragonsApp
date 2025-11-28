@@ -1,10 +1,20 @@
 package com.dungeonsproject.controller;
 
+import static com.dungeonsproject.rules.Ability.CHA;
+import static com.dungeonsproject.rules.Ability.CON;
+import static com.dungeonsproject.rules.Ability.DEX;
+import static com.dungeonsproject.rules.Ability.ITL;
+import static com.dungeonsproject.rules.Ability.STR;
+import static com.dungeonsproject.rules.Ability.WIS;
+import static com.dungeonsproject.rules.CharacterBonusEngine.computeSkillModifiers;
+
 import java.io.IOException;
+import java.util.Map;
 
 import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
 import com.dungeonsproject.characterdata.Stats;
+import com.dungeonsproject.rules.Skill;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -48,6 +58,44 @@ public class CharacterSheetController {
     @FXML
     private Label chaMod;
 
+    //Skills Display
+    @FXML
+    private Label acrobaticsSkill;
+    @FXML
+    private Label animalHandlingSkill;
+    @FXML
+    private Label arcanaSkill;
+    @FXML
+    private Label athleticsSkill;
+    @FXML
+    private Label deceptionSkill;
+    @FXML
+    private Label historySkill;
+    @FXML
+    private Label insightSkill;
+    @FXML
+    private Label intimidationSkill;
+    @FXML
+    private Label investigationSkill;
+    @FXML
+    private Label medicineSkill;
+    @FXML
+    private Label natureSkill;
+    @FXML
+    private Label perceptionSkill;
+    @FXML
+    private Label performanceSkill;
+    @FXML
+    private Label persuasionSkill;
+    @FXML
+    private Label religionSkill;
+    @FXML
+    private Label sleightOfHandSkill;
+    @FXML
+    private Label stealthSkill;
+    @FXML
+    private Label survivalSkill;
+
     //HP Tracker
     @FXML
     private Label currentHpLabel;
@@ -70,19 +118,40 @@ public class CharacterSheetController {
 
         Stats stats = sheet.getStats();
 
-        strMod.setText("(" + stats.getStr() + ")");
-        dexMod.setText("(" + stats.getDex() + ")");
-        conMod.setText("(" + stats.getCon() + ")");
-        intMod.setText("(" + stats.getItl() + ")");
-        wisMod.setText("(" + stats.getWis() + ")");
-        chaMod.setText("(" + stats.getCha() + ")");
+        strMod.setText("(" + stats.getScore(STR) + ")");
+        dexMod.setText("(" + stats.getScore(DEX) + ")");
+        conMod.setText("(" + stats.getScore(CON) + ")");
+        intMod.setText("(" + stats.getScore(ITL) + ")");
+        wisMod.setText("(" + stats.getScore(WIS) + ")");
+        chaMod.setText("(" + stats.getScore(CHA) + ")");
 
-        strValue.setText(calculateModifier(stats.getStr()));
-        dexValue.setText(calculateModifier(stats.getDex()));
-        conValue.setText(calculateModifier(stats.getCon()));
-        intValue.setText(calculateModifier(stats.getItl()));
-        wisValue.setText(calculateModifier(stats.getWis()));
-        chaValue.setText(calculateModifier(stats.getCha()));
+        strValue.setText(toModifierString(stats.getModifier(STR)));
+        dexValue.setText(toModifierString(stats.getModifier(DEX)));
+        conValue.setText(toModifierString(stats.getModifier(CON)));
+        intValue.setText(toModifierString(stats.getModifier(ITL)));
+        wisValue.setText(toModifierString(stats.getModifier(WIS)));
+        chaValue.setText(toModifierString(stats.getModifier(CHA)));
+
+        Map<String, Integer> skillMap = computeSkillModifiers(sheet);
+
+        acrobaticsSkill.setText(toModifierString(skillMap.get(Skill.ACROBATICS.name)));
+        animalHandlingSkill.setText(toModifierString(skillMap.get(Skill.ANIMAL_HANDLING.name)));
+        arcanaSkill.setText(toModifierString(skillMap.get(Skill.ARCANA.name)));
+        athleticsSkill.setText(toModifierString(skillMap.get(Skill.ATHLETICS.name)));
+        deceptionSkill.setText(toModifierString(skillMap.get(Skill.DECEPTION.name)));
+        historySkill.setText(toModifierString(skillMap.get(Skill.HISTORY.name)));
+        insightSkill.setText(toModifierString(skillMap.get(Skill.INSIGHT.name)));
+        intimidationSkill.setText(toModifierString(skillMap.get(Skill.INTIMIDATION.name)));
+        investigationSkill.setText(toModifierString(skillMap.get(Skill.INVESTIGATION.name)));
+        medicineSkill.setText(toModifierString(skillMap.get(Skill.MEDICINE.name)));
+        natureSkill.setText(toModifierString(skillMap.get(Skill.NATURE.name)));
+        perceptionSkill.setText(toModifierString(skillMap.get(Skill.PERCEPTION.name)));
+        performanceSkill.setText(toModifierString(skillMap.get(Skill.PERFORMANCE.name)));
+        persuasionSkill.setText(toModifierString(skillMap.get(Skill.PERSUASION.name)));
+        religionSkill.setText(toModifierString(skillMap.get(Skill.RELIGION.name)));
+        sleightOfHandSkill.setText(toModifierString(skillMap.get(Skill.SLEIGHT_OF_HAND.name)));
+        stealthSkill.setText(toModifierString(skillMap.get(Skill.STEALTH.name)));
+        survivalSkill.setText(toModifierString(skillMap.get(Skill.SURVIVAL.name)));
     }
 
     @FXML
@@ -111,12 +180,11 @@ public class CharacterSheetController {
         currentHpLabel.setText(healthString + currentHealth);
     }
 
-    private String calculateModifier(int value) {
-        int calculatedMod = (value - 10) / 2;
-        if (calculatedMod > 0) {
-            return "+" + calculatedMod;
+    private String toModifierString(int modifier) {
+        if (modifier > 0) {
+            return "+" + modifier;
         } else {
-            return "" + calculatedMod;
+            return "" + modifier;
         }
     }
     

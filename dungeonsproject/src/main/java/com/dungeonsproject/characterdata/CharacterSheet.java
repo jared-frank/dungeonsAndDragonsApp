@@ -16,11 +16,7 @@ public class CharacterSheet {
     private List<String> expertise;
     private String background;
     private String subClass;
-    private HitDice hitDice;  
-
-    public void initializeSkills(){
-
-    }
+    private HitDice hitDice;
 
     public int getCurrentHp() {
         return currentHp;
@@ -45,7 +41,6 @@ public class CharacterSheet {
     public void setStats(Stats stats) {
         this.stats = stats;
     }
-
 
     public String getCharClass() {
         return charClass;

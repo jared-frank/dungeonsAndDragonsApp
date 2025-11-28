@@ -1,6 +1,6 @@
 package com.dungeonsproject.characterdata;
 
-import com.dungeonsproject.constants.Ability;
+import com.dungeonsproject.rules.Ability;
 
 public class Stats {
     private int str;
@@ -21,40 +21,25 @@ public class Stats {
         };
     }
 
-    public int getStr() {
-        return str;
+    public int getScore(Ability ability) {
+        return switch(ability) {
+            case STR -> str;
+            case DEX -> dex;
+            case CON -> con;
+            case ITL -> itl;
+            case WIS -> wis;
+            case CHA -> cha;
+        };
     }
-    public void setStr(int str) {
-        this.str = str;
-    }
-    public int getDex() {
-        return dex;
-    }
-    public void setDex(int dex) {
-        this.dex = dex;
-    }
-    public int getCon() {
-        return con;
-    }
-    public void setCon(int con) {
-        this.con = con;
-    }
-    public int getItl() {
-        return itl;
-    }
-    public void setItl(int itl) {
-        this.itl = itl;
-    }
-    public int getWis() {
-        return wis;
-    }
-    public void setWis(int wis) {
-        this.wis = wis;
-    }
-    public int getCha() {
-        return cha;
-    }
-    public void setCha(int cha) {
-        this.cha = cha;
-    }
+
+   public void setScore(Ability ability, int score) {
+        switch(ability) {
+            case STR -> this.str = score;
+            case DEX -> this.dex = score;
+            case CON -> this.con = score;
+            case ITL -> this.itl = score;
+            case WIS -> this.wis = score;
+            case CHA -> this.cha = score;
+        }
+   }
 }
