@@ -1,9 +1,10 @@
-package com.dungeonsproject;
+package com.dungeonsproject.controller;
 
 import java.io.IOException;
 
+import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
-import com.dungeonsproject.characterdata.CharacterSheet.Stats;
+import com.dungeonsproject.characterdata.Stats;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -91,9 +92,9 @@ public class CharacterSheetController {
         if (currentHealth + maxHealth <= 0) {
             App.getCharacterSheet().setCurrentHp(0);
             App.setRoot("ded");
-        } else if (currentHealth < 0) {
+        } else if (currentHealth <= 0) {
             App.getCharacterSheet().setCurrentHp(0);
-            currentHpLabel.setText(healthString + "0");
+            App.setRoot("deathSaving");
         } else {
             App.getCharacterSheet().setCurrentHp(currentHealth);
             currentHpLabel.setText(healthString + currentHealth);

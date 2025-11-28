@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dungeonsproject.CharacterSheetController" spacing="20">
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dungeonsproject.controller.CharacterSheetController" spacing="20">
    <padding>
       <Insets top="20" right="20" bottom="20" left="20" />
    </padding>

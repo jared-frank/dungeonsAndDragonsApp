@@ -12,80 +12,14 @@ public class CharacterSheet {
     private int maxHp;
     private int speed;
     private Stats stats;
-    private List<String> skills;
+    private List<String> proficiences;
+    private List<String> expertise;
     private String background;
     private String subClass;
-    private HitDice hitDice;
+    private HitDice hitDice;  
 
-    public static class Stats {
-        private int str;
-        private int dex;
-        private int con;
-        private int itl;
-        private int wis;
-        private int cha;
-        
-        public int getStr() {
-            return str;
-        }
-        public void setStr(int str) {
-            this.str = str;
-        }
-        public int getDex() {
-            return dex;
-        }
-        public void setDex(int dex) {
-            this.dex = dex;
-        }
-        public int getCon() {
-            return con;
-        }
-        public void setCon(int con) {
-            this.con = con;
-        }
-        public int getItl() {
-            return itl;
-        }
-        public void setItl(int itl) {
-            this.itl = itl;
-        }
-        public int getWis() {
-            return wis;
-        }
-        public void setWis(int wis) {
-            this.wis = wis;
-        }
-        public int getCha() {
-            return cha;
-        }
-        public void setCha(int cha) {
-            this.cha = cha;
-        }
-    }
-    
-    public static class HitDice {
-        private int quantity;
-        private int type;
-        private int bonus;
+    public void initializeSkills(){
 
-        public int getQuantity() {
-            return quantity;
-        }
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-        public int getType() {
-            return type;
-        }
-        public void setType(int type) {
-            this.type = type;
-        }
-        public int getBonus() {
-            return bonus;
-        }
-        public void setBonus(int bonus) {
-            this.bonus = bonus;
-        }
     }
 
     public int getCurrentHp() {
@@ -112,13 +46,6 @@ public class CharacterSheet {
         this.stats = stats;
     }
 
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
 
     public String getCharClass() {
         return charClass;
@@ -190,5 +117,21 @@ public class CharacterSheet {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public List<String> getProficiences() {
+        return proficiences;
+    }
+
+    public void setProficiences(List<String> proficiences) {
+        this.proficiences = proficiences;
+    }
+
+    public List<String> getExpertise() {
+        return expertise;
+    }
+
+    public void setExpertise(List<String> expertise) {
+        this.expertise = expertise;
     }
 }

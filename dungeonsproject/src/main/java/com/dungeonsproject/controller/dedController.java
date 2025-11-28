@@ -1,6 +1,9 @@
-package com.dungeonsproject;
+package com.dungeonsproject.controller;
 
 import java.io.IOException;
+
+import com.dungeonsproject.App;
+
 import javafx.fxml.FXML;
 
 public class dedController {

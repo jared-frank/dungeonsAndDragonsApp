@@ -3,7 +3,7 @@ module com.dungeonsproject {
     requires javafx.fxml;
     requires com.google.gson;
 
-    opens com.dungeonsproject to javafx.fxml;
+    opens com.dungeonsproject.controller to javafx.fxml;
     opens com.dungeonsproject.characterdata to com.google.gson;
     exports com.dungeonsproject;
 }
