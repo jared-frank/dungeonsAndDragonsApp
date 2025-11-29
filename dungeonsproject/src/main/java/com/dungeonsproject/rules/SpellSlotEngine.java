@@ -1,8 +1,38 @@
 package com.dungeonsproject.rules;
 
+import java.util.List;
 import java.util.Map;
 
 public class SpellSlotEngine {
+
+    public static final String[] SLOT_TITLES = new String[]{
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth",
+        "Sixth",
+        "Seventh",
+        "Eighth",
+        "Ninth"
+    };
+
+    public static final List<String> FULL_CASTER_CLASSES = List.of(
+        "Bard",
+        "Cleric",
+        "Druid",
+        "Sorcerer",
+        "Wizard",
+        "Warlock"
+    );
+
+    public static int getMaxSpellLevel(String charClass, int charLevel) {
+        if (FULL_CASTER_CLASSES.contains(charClass)) {
+            return Math.min(9, (charLevel+1)/2);
+        } else {
+            return 0;
+        }
+    }
 
     public static final Map<Integer, int[]> FULL_CASTER_SLOTS = Map.ofEntries(
         Map.entry( 1, new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0}),

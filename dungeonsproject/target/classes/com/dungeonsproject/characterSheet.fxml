@@ -11,23 +11,28 @@
 
     <!-- ==== CHARACTER INFO SECTION ==== -->
     <GridPane hgap="10" vgap="6">
-        <columnConstraints>
-            <ColumnConstraints halignment="CENTER"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
-        </columnConstraints>
+      <GridPane hgap="10" vgap="6" GridPane.columnIndex="0">
+         <columnConstraints>
+               <ColumnConstraints halignment="CENTER"/>
+               <ColumnConstraints hgrow="ALWAYS"/>
+         </columnConstraints>
 
-        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Label fx:id="nameLabel" text="--" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+         <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+         <Label fx:id="nameLabel" text="--" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Level:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <Label fx:id="levelLabel" text="--" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+         <Label text="Level:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+         <Label fx:id="levelLabel" text="--" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Class:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <Label fx:id="classLabel" text="--" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+         <Label text="Class:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+         <Label fx:id="classLabel" text="--" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <Label text="Race:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <Label fx:id="raceLabel" text="--" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-    </GridPane>
+         <Label text="Race:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+         <Label fx:id="raceLabel" text="--" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+      </GridPane>
+      <VBox GridPane.columnIndex="1" alignment="CENTER">
+         <Button text="Long Rest" onAction="#takeLongRest"/> 
+      </VBox>
+   </GridPane>
 
     <!-- ==== ABILITY SCORES SECTION ==== -->
     <GridPane hgap="40" vgap="10">
@@ -73,6 +78,10 @@
 
       <VBox alignment="CENTER" spacing="20" GridPane.columnIndex="1">
          <GridPane hgap="10" vgap="6">
+            <columnConstraints>
+               <ColumnConstraints halignment="LEFT"/>
+               <ColumnConstraints halignment="CENTER"/>
+            </columnConstraints>
             <Label text="Acrobatics:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
             <Label fx:id="acrobaticsSkill" text="--" GridPane.columnIndex="1"  GridPane.rowIndex="0"/>
 
@@ -137,30 +146,7 @@
                <Button text="Take Damage" onAction="#onDamageClick"/>
                <Button text="Heal Damage" onAction="#onHealClick"/>
             </VBox>
-            <VBox GridPane.rowIndex="1">
-               <Label text="Spell Slots"/>
-               <GridPane hgap="10" vgap="6" alignment="CENTER">
-                  <Label fx:id="firstLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                  <Label fx:id="secondLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                  <Label fx:id="thirdLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-                  <Label fx:id="fourthLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-                  <Label fx:id="fifthLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
-                  <Label fx:id="sixthLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="5"/>
-                  <Label fx:id="seventhLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="6"/>
-                  <Label fx:id="eigthLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="7"/>
-                  <Label fx:id="ninthLevelSpell" text="--" GridPane.rowIndex="0" GridPane.columnIndex="8"/>
-                  
-                  <Label text="First" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                  <Label text="Second" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                  <Label text="Third" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-                  <Label text="Fourth" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-                  <Label text="Fifth" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
-                  <Label text="Sixth" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
-                  <Label text="Seventh" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
-                  <Label text="Eighth" GridPane.rowIndex="1" GridPane.columnIndex="7"/>
-                  <Label text="Ninth" GridPane.rowIndex="1" GridPane.columnIndex="8"/>
-               </GridPane>
-            </VBox>
+            <HBox fx:id="spellSlotContainer" spacing="12" GridPane.rowIndex="1"/>
             <GridPane alignment="CENTER" GridPane.rowIndex="2">
                <ComboBox fx:id="spellSlotToUse" prefWidth="150.0" GridPane.columnIndex="0"/>
                <Button text="Use Spell" onAction="#onUseSpell" GridPane.columnIndex="1"/>

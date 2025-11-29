@@ -8,20 +8,24 @@ import static com.dungeonsproject.rules.Ability.STR;
 import static com.dungeonsproject.rules.Ability.WIS;
 import static com.dungeonsproject.rules.CharacterBonusEngine.computeSkillModifiers;
 
+import static com.dungeonsproject.rules.SpellSlotEngine.FULL_CASTER_CLASSES;
+import static com.dungeonsproject.rules.SpellSlotEngine.FULL_CASTER_SLOTS;
+
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
 import com.dungeonsproject.characterdata.Stats;
 import com.dungeonsproject.rules.Skill;
+import com.dungeonsproject.uibuilder.SpellSlotBuilder;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 public class CharacterSheetController {
 
@@ -109,23 +113,10 @@ public class CharacterSheetController {
     @FXML
     private ComboBox<String> spellSlotToUse;
     @FXML
-    private Label firstLevelSpell;
-    @FXML
-    private Label secondLevelSpell;
-    @FXML
-    private Label thirdLevelSpell;
-    @FXML
-    private Label fourthLevelSpell;
-    @FXML
-    private Label fifthLevelSpell;
-    @FXML
-    private Label sixthLevelSpell;
-    @FXML
-    private Label seventhLevelSpell;
-    @FXML
-    private Label eigthLevelSpell;
-    @FXML
-    private Label ninthLevelSpell;
+    private HBox spellSlotContainer;
+    private Map <Integer, Label> remainingspellSlotLabels;
+
+    private SpellSlotBuilder spellSlotBuilder;
 
     private int maxHealth = App.getCharacterSheet().getMaxHp();
 
@@ -135,6 +126,8 @@ public class CharacterSheetController {
     public void initialize() {
         CharacterSheet sheet = App.getCharacterSheet();
 
+        spellSlotBuilder = new SpellSlotBuilder();
+
         nameLabel.setText(sheet.getName());
         levelLabel.setText("" + sheet.getLevel());
         classLabel.setText(sheet.getSubClass() + " " + sheet.getCharClass());
@@ -142,56 +135,13 @@ public class CharacterSheetController {
         currentHpLabel.setText(healthString + sheet.getCurrentHp());
 
         Stats stats = sheet.getStats();
+        showStatValues(stats);
 
-        strMod.setText("(" + stats.getScore(STR) + ")");
-        dexMod.setText("(" + stats.getScore(DEX) + ")");
-        conMod.setText("(" + stats.getScore(CON) + ")");
-        intMod.setText("(" + stats.getScore(ITL) + ")");
-        wisMod.setText("(" + stats.getScore(WIS) + ")");
-        chaMod.setText("(" + stats.getScore(CHA) + ")");
+        showSkillValues(sheet);
 
-        strValue.setText(toModifierString(stats.getModifier(STR)));
-        dexValue.setText(toModifierString(stats.getModifier(DEX)));
-        conValue.setText(toModifierString(stats.getModifier(CON)));
-        intValue.setText(toModifierString(stats.getModifier(ITL)));
-        wisValue.setText(toModifierString(stats.getModifier(WIS)));
-        chaValue.setText(toModifierString(stats.getModifier(CHA)));
+        spellSlotToUse.setItems(spellSlotBuilder.getSpellSlotOptions(sheet));
 
-        Map<String, Integer> skillMap = computeSkillModifiers(sheet);
-
-        acrobaticsSkill.setText(toModifierString(skillMap.get(Skill.ACROBATICS.name)));
-        animalHandlingSkill.setText(toModifierString(skillMap.get(Skill.ANIMAL_HANDLING.name)));
-        arcanaSkill.setText(toModifierString(skillMap.get(Skill.ARCANA.name)));
-        athleticsSkill.setText(toModifierString(skillMap.get(Skill.ATHLETICS.name)));
-        deceptionSkill.setText(toModifierString(skillMap.get(Skill.DECEPTION.name)));
-        historySkill.setText(toModifierString(skillMap.get(Skill.HISTORY.name)));
-        insightSkill.setText(toModifierString(skillMap.get(Skill.INSIGHT.name)));
-        intimidationSkill.setText(toModifierString(skillMap.get(Skill.INTIMIDATION.name)));
-        investigationSkill.setText(toModifierString(skillMap.get(Skill.INVESTIGATION.name)));
-        medicineSkill.setText(toModifierString(skillMap.get(Skill.MEDICINE.name)));
-        natureSkill.setText(toModifierString(skillMap.get(Skill.NATURE.name)));
-        perceptionSkill.setText(toModifierString(skillMap.get(Skill.PERCEPTION.name)));
-        performanceSkill.setText(toModifierString(skillMap.get(Skill.PERFORMANCE.name)));
-        persuasionSkill.setText(toModifierString(skillMap.get(Skill.PERSUASION.name)));
-        religionSkill.setText(toModifierString(skillMap.get(Skill.RELIGION.name)));
-        sleightOfHandSkill.setText(toModifierString(skillMap.get(Skill.SLEIGHT_OF_HAND.name)));
-        stealthSkill.setText(toModifierString(skillMap.get(Skill.STEALTH.name)));
-        survivalSkill.setText(toModifierString(skillMap.get(Skill.SURVIVAL.name)));
-
-        ObservableList<String> spellSlotOptions = FXCollections.observableArrayList(
-            "First Level", 
-            "Second Level", 
-            "Third Level", 
-            "Fourth Level",
-            "Fifth Level",
-            "Sixth Level",
-            "Seventh Level",
-            "Eigth Level",
-            "Ninth Level"
-        );
-        spellSlotToUse.setItems(spellSlotOptions);
-
-        showSpells();
+        remainingspellSlotLabels = spellSlotBuilder.buildSpellSlotUI(spellSlotContainer, App.getCharacterSheet());
     }
 
     @FXML
@@ -224,16 +174,37 @@ public class CharacterSheetController {
     private void onUseSpell() throws IOException {
         String selectedSpellLevel = spellSlotToUse.getSelectionModel().getSelectedItem();
         switch (selectedSpellLevel) {
-            case "First Level"  -> { subtractSpell(1);}
-            case "Second Level" -> { subtractSpell(2);}
-            case "Third Level"  -> { subtractSpell(3);}
-            case "Fourth Level" -> { subtractSpell(4);}
-            case "Fifth Level"  -> { subtractSpell(5);}
-            case "Sixth Level"  -> { subtractSpell(6);}
-            case "Seventh Level"-> { subtractSpell(7);}
-            case "Eigth Level"  -> { subtractSpell(8);}
-            case "Ninth Level"  -> { subtractSpell(9);}
+            case "First Level"  -> { subtractSpell(1); }
+            case "Second Level" -> { subtractSpell(2); }
+            case "Third Level"  -> { subtractSpell(3); }
+            case "Fourth Level" -> { subtractSpell(4); }
+            case "Fifth Level"  -> { subtractSpell(5); }
+            case "Sixth Level"  -> { subtractSpell(6); }
+            case "Seventh Level"-> { subtractSpell(7); }
+            case "Eighth Level"  -> { subtractSpell(8); }
+            case "Ninth Level"  -> { subtractSpell(9); }
         }
+    }
+
+    @FXML
+    private void takeLongRest() throws IOException {
+        String characterClass = App.getCharacterSheet().getCharClass();
+        
+        // Reset Spell Slots
+        if (FULL_CASTER_CLASSES.contains(characterClass)) {
+            int[] fullCasterSlots = FULL_CASTER_SLOTS.get(App.getCharacterSheet().getLevel());
+            App.getCharacterSheet().setRemainingSpellSlots(Arrays.copyOf(fullCasterSlots, fullCasterSlots.length));
+
+            for (Map.Entry<Integer, Label> entry : remainingspellSlotLabels.entrySet()) {
+                int idx = entry.getKey() - 1;
+                Label remainingSpells = entry.getValue();
+                remainingSpells.setText( fullCasterSlots[idx] + " / " + fullCasterSlots[idx]);
+            }
+        }
+
+        // Reset Health
+        App.getCharacterSheet().setCurrentHp(maxHealth);
+        currentHpLabel.setText(healthString + App.getCharacterSheet().getCurrentHp());
     }
 
     private void subtractSpell(int level) {
@@ -243,21 +214,48 @@ public class CharacterSheetController {
         if (currentSlotValue > 0) {
             currentSpells[idx] = currentSlotValue - 1;
             App.getCharacterSheet().setRemainingSpellSlots(currentSpells);
-            showSpells();
         }
+
+        remainingspellSlotLabels.get(level).setText(currentSpells[idx] + " / " + FULL_CASTER_SLOTS.get(App.getCharacterSheet().getLevel())[idx]);
     }
 
-    private void showSpells() {
-        int[] currentSpellSlots = App.getCharacterSheet().getRemainingSpellSlots();
-        firstLevelSpell.setText("" + currentSpellSlots[0]);
-        secondLevelSpell.setText("" + currentSpellSlots[1]);
-        thirdLevelSpell.setText("" + currentSpellSlots[2]);
-        fourthLevelSpell.setText("" + currentSpellSlots[3]);
-        fifthLevelSpell.setText("" + currentSpellSlots[4]);
-        sixthLevelSpell.setText("" + currentSpellSlots[5]);
-        seventhLevelSpell.setText("" + currentSpellSlots[6]);
-        eigthLevelSpell.setText("" + currentSpellSlots[7]);
-        ninthLevelSpell.setText("" + currentSpellSlots[8]);
+    private void showStatValues(Stats stats) {
+        strMod.setText("(" + stats.getScore(STR) + ")");
+        dexMod.setText("(" + stats.getScore(DEX) + ")");
+        conMod.setText("(" + stats.getScore(CON) + ")");
+        intMod.setText("(" + stats.getScore(ITL) + ")");
+        wisMod.setText("(" + stats.getScore(WIS) + ")");
+        chaMod.setText("(" + stats.getScore(CHA) + ")");
+
+        strValue.setText(toModifierString(stats.getModifier(STR)));
+        dexValue.setText(toModifierString(stats.getModifier(DEX)));
+        conValue.setText(toModifierString(stats.getModifier(CON)));
+        intValue.setText(toModifierString(stats.getModifier(ITL)));
+        wisValue.setText(toModifierString(stats.getModifier(WIS)));
+        chaValue.setText(toModifierString(stats.getModifier(CHA)));
+    }
+
+    private void showSkillValues(CharacterSheet sheet) {
+        Map<String, Integer> skillMap = computeSkillModifiers(sheet);
+
+        acrobaticsSkill.setText(toModifierString(skillMap.get(Skill.ACROBATICS.name)));
+        animalHandlingSkill.setText(toModifierString(skillMap.get(Skill.ANIMAL_HANDLING.name)));
+        arcanaSkill.setText(toModifierString(skillMap.get(Skill.ARCANA.name)));
+        athleticsSkill.setText(toModifierString(skillMap.get(Skill.ATHLETICS.name)));
+        deceptionSkill.setText(toModifierString(skillMap.get(Skill.DECEPTION.name)));
+        historySkill.setText(toModifierString(skillMap.get(Skill.HISTORY.name)));
+        insightSkill.setText(toModifierString(skillMap.get(Skill.INSIGHT.name)));
+        intimidationSkill.setText(toModifierString(skillMap.get(Skill.INTIMIDATION.name)));
+        investigationSkill.setText(toModifierString(skillMap.get(Skill.INVESTIGATION.name)));
+        medicineSkill.setText(toModifierString(skillMap.get(Skill.MEDICINE.name)));
+        natureSkill.setText(toModifierString(skillMap.get(Skill.NATURE.name)));
+        perceptionSkill.setText(toModifierString(skillMap.get(Skill.PERCEPTION.name)));
+        performanceSkill.setText(toModifierString(skillMap.get(Skill.PERFORMANCE.name)));
+        persuasionSkill.setText(toModifierString(skillMap.get(Skill.PERSUASION.name)));
+        religionSkill.setText(toModifierString(skillMap.get(Skill.RELIGION.name)));
+        sleightOfHandSkill.setText(toModifierString(skillMap.get(Skill.SLEIGHT_OF_HAND.name)));
+        stealthSkill.setText(toModifierString(skillMap.get(Skill.STEALTH.name)));
+        survivalSkill.setText(toModifierString(skillMap.get(Skill.SURVIVAL.name)));
     }
 
     private String toModifierString(int modifier) {
