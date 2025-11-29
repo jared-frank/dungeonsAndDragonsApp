@@ -23,11 +23,11 @@ public class App extends Application {
     public void start(Stage stage) throws IOException { 
         if (characterStorage.characterFileExists()) {
             initializeCharacterSheet();
-            scene = new Scene(loadFXML("characterSheet"), 640, 480);
+            scene = new Scene(loadFXML("characterSheet"), 1280, 960);
             stage.setScene(scene);
             stage.show();
         } else {
-            scene = new Scene(loadFXML("characterCreation"), 640, 480);
+            scene = new Scene(loadFXML("characterCreation"), 1280, 960);
             stage.setScene(scene);
             stage.show();
         }

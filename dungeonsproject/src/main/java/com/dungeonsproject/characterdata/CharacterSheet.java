@@ -17,6 +17,7 @@ public class CharacterSheet {
     private String background;
     private String subClass;
     private HitDice hitDice;
+    private int[] remainingSpellSlots;
 
     public int getCurrentHp() {
         return currentHp;
@@ -129,4 +130,13 @@ public class CharacterSheet {
     public void setExpertise(List<String> expertise) {
         this.expertise = expertise;
     }
+
+    public int[] getRemainingSpellSlots() {
+        return remainingSpellSlots;
+    }
+
+    public void setRemainingSpellSlots(int[] remainingSpellSlots) {
+        this.remainingSpellSlots = remainingSpellSlots;
+    }
+    
 }

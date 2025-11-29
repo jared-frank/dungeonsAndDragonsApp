@@ -9,7 +9,6 @@ public class CharacterBonusEngine {
 
     public static Map<String, Integer> computeSkillModifiers(CharacterSheet data) {
         Map<String, Integer> result = new HashMap<>();
-
         int profBonus = proficiencyBonus(data.getLevel());
 
         for (Skill skill : Skill.values()) {
@@ -21,18 +20,15 @@ public class CharacterBonusEngine {
             if (data.getProficiences().contains(type)) {
                 mod += profBonus;
             }
-
             if (data.getExpertise().contains(type)) {
                 mod += profBonus;
             }
-
             result.put(type, mod);
         }
-
         return result;
     }
 
-    private static int proficiencyBonus(int level) {
+    public static int proficiencyBonus(int level) {
         if (level >= 17) return 6;
         if (level >= 13) return 5;
         if (level >= 9) return 4;
