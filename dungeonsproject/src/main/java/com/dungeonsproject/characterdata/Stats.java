@@ -12,12 +12,12 @@ public class Stats {
     
     public int getModifier(Ability ability) {
         return switch(ability) {
-            case STR -> (str - 10) / 2;
-            case DEX -> (dex - 10) / 2;
-            case CON -> (con - 10) / 2;
-            case ITL -> (itl - 10) / 2;
-            case WIS -> (wis - 10) / 2;
-            case CHA -> (cha - 10) / 2;
+            case STR -> Math.floorDiv((str - 10), 2);
+            case DEX -> Math.floorDiv((dex - 10), 2);
+            case CON -> Math.floorDiv((con - 10), 2);
+            case ITL -> Math.floorDiv((itl - 10), 2);
+            case WIS -> Math.floorDiv((wis - 10), 2);
+            case CHA -> Math.floorDiv((cha - 10), 2);
         };
     }
 

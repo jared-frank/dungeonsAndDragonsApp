@@ -22,8 +22,7 @@ public class SpellSlotEngine {
         "Cleric",
         "Druid",
         "Sorcerer",
-        "Wizard",
-        "Warlock"
+        "Wizard"
     );
 
     public static int getMaxSpellLevel(String charClass, int charLevel) {

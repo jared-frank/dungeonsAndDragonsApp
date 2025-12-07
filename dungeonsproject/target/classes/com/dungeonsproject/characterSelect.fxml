@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dungeonsproject.controller.CharacterSelectController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <top>
+        <Label text="Select Your Character"
+               style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+    </top>
+    <center>
+        <ListView fx:id="characterListView"
+                  prefHeight="300"/>
+    </center>
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="New Character"
+                    onAction="#handleNewCharacter"/>
+            <Button text="Delete"
+                   onAction="#handleDeleteCharacter"/>
+            <Button text="Load"
+                    onAction="#handleLoadCharacter"/>
+        </HBox>
+    </bottom>
+</BorderPane>

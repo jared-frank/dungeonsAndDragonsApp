@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.dungeonsproject.App;
+import com.dungeonsproject.gamecontext.GameContext;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,6 +16,8 @@ public class DeathSavingController {
     
     private int saveCount;
     private int failCount;
+
+    GameContext context = GameContext.getInstance();
 
     @FXML
     private Label saveThrowCount;
@@ -33,8 +36,8 @@ public class DeathSavingController {
     private void onSave() throws IOException {
         saveCount += 1;
         if (saveCount >= 3) {
-            App.getCharacterSheet().setCurrentHp(1);
-            App.setRoot("characterSheet");
+            context.getCharacterSheet().setCurrentHp(1);
+            App.setRoot("gameplayTabs");
         } else {
             saveThrowCount.setText(screenCounterDisplay.get(saveCount));
         }
@@ -64,8 +67,8 @@ public class DeathSavingController {
     private void onDoubleSave() throws IOException {
         saveCount += 2;
         if (saveCount >= 3) {
-            App.getCharacterSheet().setCurrentHp(1);
-            App.setRoot("characterSheet");
+            context.getCharacterSheet().setCurrentHp(1);
+            App.setRoot("gameplayTabs");
         } else {
             saveThrowCount.setText(screenCounterDisplay.get(saveCount));
         }
@@ -73,16 +76,16 @@ public class DeathSavingController {
 
     @FXML
     private void onHeal() throws IOException {
-        int currentHp = App.getCharacterSheet().getCurrentHp();
+        int currentHp = context.getCharacterSheet().getCurrentHp();
         int healingDamage = Integer.parseInt(healingInput.getText());
 
         currentHp += healingDamage;
         
-        if (currentHp > App.getCharacterSheet().getMaxHp()) {
-            currentHp = App.getCharacterSheet().getMaxHp();
+        if (currentHp > context.getCharacterSheet().getMaxHp()) {
+            currentHp = context.getCharacterSheet().getMaxHp();
         }
 
-        App.getCharacterSheet().setCurrentHp(currentHp);
-        App.setRoot("characterSheet");
+        context.getCharacterSheet().setCurrentHp(currentHp);
+        App.setRoot("gameplayTabs");
     }
 }

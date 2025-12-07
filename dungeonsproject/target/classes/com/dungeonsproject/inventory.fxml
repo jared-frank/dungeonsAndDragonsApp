@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dungeonsproject.controller.InventoryController"
+            prefWidth="1200"
+            prefHeight="800">
+
+    <!-- LEFT: Inventory List -->
+    <left>
+        <ScrollPane fitToWidth="true" prefWidth="600">
+            <VBox fx:id="inventoryListContainer"/>
+        </ScrollPane>
+    </left>
+
+    <!-- CENTER: Dynamic Add Item Panel -->
+    <center>
+        <VBox>
+
+            <Label text="Add Item" style="-fx-font-size: 20px;"/>
+
+            <ComboBox fx:id="itemTypeCombo" promptText="Select Item Type"/>
+
+            <!-- Content changes based on selection above -->
+            <VBox fx:id="dynamicInputArea" spacing="10"/>
+
+            <Button text="Add to Inventory"
+                    onAction="#handleAddItem"/>
+
+        </VBox>
+    </center>
+
+    <!-- BOTTOM: Equipped Items -->
+    <bottom>
+        <HBox spacing="60" alignment="CENTER">
+
+            <VBox fx:id="armorSlot" alignment="CENTER" spacing="10">
+                <Label text="Armor Slot"/>
+            </VBox>
+
+            <VBox fx:id="mainHandSlot" alignment="CENTER" spacing="10">
+                <Label text="Main Hand"/>
+            </VBox>
+
+            <VBox fx:id="offHandSlot" alignment="CENTER" spacing="10">
+                <Label text="Off Hand"/>
+            </VBox>
+
+        </HBox>
+    </bottom>
+
+</BorderPane>

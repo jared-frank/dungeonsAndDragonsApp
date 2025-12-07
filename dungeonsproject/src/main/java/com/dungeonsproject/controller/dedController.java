@@ -10,6 +10,6 @@ public class dedController {
 
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("characterSheet");
+        App.setRoot("gameplayTabs");
     }
 }

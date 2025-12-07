@@ -16,7 +16,6 @@ public class CharacterSheet {
     private List<String> expertise;
     private String background;
     private String subClass;
-    private HitDice hitDice;
     private int[] remainingSpellSlots;
 
     public int getCurrentHp() {
@@ -89,14 +88,6 @@ public class CharacterSheet {
 
     public void setSubClass(String subClass) {
         this.subClass = subClass;
-    }
-
-    public HitDice getHitDice() {
-        return hitDice;
-    }
-
-    public void setHitDice(HitDice hitDice) {
-        this.hitDice = hitDice;
     }
 
     public String getSubRace() {

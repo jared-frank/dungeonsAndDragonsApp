@@ -1,0 +1,26 @@
+{
+    "items": {
+        "Crossbow, light": {
+            "name": "Crossbow, light",
+            "slotsUsed": 1,
+            "isBundle": false,
+            "isPack": false
+        },
+        "Priest's Pack": {
+            "name": "Priest's Pack",
+            "isPack": true,
+            "isBundle": false,
+            "packItems":[
+                "Backpack",
+                "Blanket",
+                "10 Candles",
+                "Tinderbox",
+                "Alms Box",
+                "2 Blocks of Incense",
+                "Censer",
+                "Vestments",
+                "Waterskin"
+            ]
+        }
+    }  
+}

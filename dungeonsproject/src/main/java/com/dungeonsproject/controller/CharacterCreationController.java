@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
 import com.dungeonsproject.characterdata.CharacterStorage;
+import com.dungeonsproject.gamecontext.GameContext;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 public class CharacterCreationController {
 
     private static CharacterStorage characterStorage = new CharacterStorage();
+
+    GameContext context = GameContext.getInstance();
 
     @FXML
     private TextField maxHpInput;
@@ -24,9 +27,9 @@ public class CharacterCreationController {
         sheet.setMaxHp(health);
         sheet.setCurrentHp(health); //start character with max HP
 
-        App.setCharacterSheet(sheet);
+        context.setActiveCharacter(sheet, null);
         characterStorage.saveStats(sheet);
 
-        App.setRoot("characterSheet");
+        App.setRoot("gameplayTabs");
     }
 }

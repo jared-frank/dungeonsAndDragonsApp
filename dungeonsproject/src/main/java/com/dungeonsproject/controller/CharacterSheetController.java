@@ -18,6 +18,7 @@ import java.util.Map;
 import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
 import com.dungeonsproject.characterdata.Stats;
+import com.dungeonsproject.gamecontext.GameContext;
 import com.dungeonsproject.rules.Skill;
 import com.dungeonsproject.uibuilder.SpellSlotBuilder;
 
@@ -114,17 +115,22 @@ public class CharacterSheetController {
     private ComboBox<String> spellSlotToUse;
     @FXML
     private HBox spellSlotContainer;
+
+    private int maxHealth;
+
     private Map <Integer, Label> remainingspellSlotLabels;
 
     private SpellSlotBuilder spellSlotBuilder;
 
-    private int maxHealth = App.getCharacterSheet().getMaxHp();
+    GameContext context = GameContext.getInstance();
 
     private final String healthString = "Current HP: ";
 
     @FXML
     public void initialize() {
-        CharacterSheet sheet = App.getCharacterSheet();
+        CharacterSheet sheet = context.getCharacterSheet();
+
+        maxHealth = sheet.getMaxHp();
 
         spellSlotBuilder = new SpellSlotBuilder();
 
@@ -141,7 +147,7 @@ public class CharacterSheetController {
 
         spellSlotToUse.setItems(spellSlotBuilder.getSpellSlotOptions(sheet));
 
-        remainingspellSlotLabels = spellSlotBuilder.buildSpellSlotUI(spellSlotContainer, App.getCharacterSheet());
+        remainingspellSlotLabels = spellSlotBuilder.buildSpellSlotUI(spellSlotContainer, sheet);
     }
 
     @FXML
@@ -149,13 +155,13 @@ public class CharacterSheetController {
         int numbersOnly = Integer.parseInt(currentHpLabel.getText().replaceAll("[^0-9]", ""));
         int currentHealth = numbersOnly - Integer.parseInt(hpInput.getText());
         if (currentHealth + maxHealth <= 0) {
-            App.getCharacterSheet().setCurrentHp(0);
+            context.getCharacterSheet().setCurrentHp(0);
             App.setRoot("ded");
         } else if (currentHealth <= 0) {
-            App.getCharacterSheet().setCurrentHp(0);
+            context.getCharacterSheet().setCurrentHp(0);
             App.setRoot("deathSaving");
         } else {
-            App.getCharacterSheet().setCurrentHp(currentHealth);
+            context.getCharacterSheet().setCurrentHp(currentHealth);
             currentHpLabel.setText(healthString + currentHealth);
         }
     }
@@ -188,12 +194,12 @@ public class CharacterSheetController {
 
     @FXML
     private void takeLongRest() throws IOException {
-        String characterClass = App.getCharacterSheet().getCharClass();
+        String characterClass = context.getCharacterSheet().getCharClass();
         
         // Reset Spell Slots
         if (FULL_CASTER_CLASSES.contains(characterClass)) {
-            int[] fullCasterSlots = FULL_CASTER_SLOTS.get(App.getCharacterSheet().getLevel());
-            App.getCharacterSheet().setRemainingSpellSlots(Arrays.copyOf(fullCasterSlots, fullCasterSlots.length));
+            int[] fullCasterSlots = FULL_CASTER_SLOTS.get(context.getCharacterSheet().getLevel());
+            context.getCharacterSheet().setRemainingSpellSlots(Arrays.copyOf(fullCasterSlots, fullCasterSlots.length));
 
             for (Map.Entry<Integer, Label> entry : remainingspellSlotLabels.entrySet()) {
                 int idx = entry.getKey() - 1;
@@ -203,20 +209,20 @@ public class CharacterSheetController {
         }
 
         // Reset Health
-        App.getCharacterSheet().setCurrentHp(maxHealth);
-        currentHpLabel.setText(healthString + App.getCharacterSheet().getCurrentHp());
+        context.getCharacterSheet().setCurrentHp(maxHealth);
+        currentHpLabel.setText(healthString + context.getCharacterSheet().getCurrentHp());
     }
 
     private void subtractSpell(int level) {
         int idx = level - 1;
-        int[] currentSpells = App.getCharacterSheet().getRemainingSpellSlots();
+        int[] currentSpells = context.getCharacterSheet().getRemainingSpellSlots();
         int currentSlotValue = currentSpells[idx];
         if (currentSlotValue > 0) {
             currentSpells[idx] = currentSlotValue - 1;
-            App.getCharacterSheet().setRemainingSpellSlots(currentSpells);
+            context.getCharacterSheet().setRemainingSpellSlots(currentSpells);
         }
 
-        remainingspellSlotLabels.get(level).setText(currentSpells[idx] + " / " + FULL_CASTER_SLOTS.get(App.getCharacterSheet().getLevel())[idx]);
+        remainingspellSlotLabels.get(level).setText(currentSpells[idx] + " / " + FULL_CASTER_SLOTS.get(context.getCharacterSheet().getLevel())[idx]);
     }
 
     private void showStatValues(Stats stats) {

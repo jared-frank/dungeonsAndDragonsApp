@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<TabPane xmlns:fx="http://javafx.com/fxml/1" tabClosingPolicy="UNAVAILABLE">
+    <tabs>
+        <Tab text="Character Sheet">
+            <content>
+                <fx:include source="characterSheet.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="Inventory">
+            <content>
+                <fx:include source="inventory.fxml"/>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
