@@ -51,7 +51,7 @@ This project intentionally uses JavaFX to demonstrate:
 ---
 
 ## Screenshots / Demo
-<!---> TODO <--->
+<!--->TODO<--->
 
 ---
 
