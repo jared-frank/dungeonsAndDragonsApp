@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 
@@ -56,12 +57,21 @@ public class CharacterStorage {
 
     public Inventory loadInventory(String characterPath) throws IOException{
         Gson gson = new Gson();
+        
         try (FileReader reader = new FileReader(characterPath + "/inventory.json")) {
-            Inventory inventory = gson.fromJson(reader, Inventory.class);
-            System.out.println(inventory.getInventory());
+            InventoryStorageModel inventoryModel = gson.fromJson(reader, InventoryStorageModel.class);
+
+            Inventory inventory = new Inventory();
+
+            for (InventoryItem item : inventoryModel.getItems()) {
+                UUID itemId = UUID.randomUUID();
+                item.setId(itemId);
+                inventory.addToInventory(item);
+            }
+
             return inventory;
         }
-    }
+    } 
     
 
     public void saveStats(CharacterSheet sheet) throws IOException {

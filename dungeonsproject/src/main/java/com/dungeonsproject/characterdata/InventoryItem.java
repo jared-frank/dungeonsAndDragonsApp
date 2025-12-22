@@ -1,15 +1,16 @@
 package com.dungeonsproject.characterdata;
 
 import java.util.List;
+import java.util.UUID;
 
 public class InventoryItem {
     private String name;
     private int slotsUsed;
-    private boolean isBundle;
+    private ItemType itemType;
     private int quantity; //only used if isBundle == true
     private int perSlotAmount; //unly used for bundles, 
-    private boolean isPack; 
     private List<String> packItems; //only used if isPack == true;
+    private UUID id;
     
     public String getName() {
         return name;
@@ -23,12 +24,6 @@ public class InventoryItem {
     public void setSlotsUsed(int slotsUsed) {
         this.slotsUsed = slotsUsed;
     }
-    public boolean isBundle() {
-        return isBundle;
-    }
-    public void setBundle(boolean isBundle) {
-        this.isBundle = isBundle;
-    }
     public int getQuantity() {
         return quantity;
     }
@@ -41,16 +36,22 @@ public class InventoryItem {
     public void setPerSlotAmount(int perSlotAmount) {
         this.perSlotAmount = perSlotAmount;
     }
-    public boolean isPack() {
-        return isPack;
-    }
-    public void setPack(boolean isPack) {
-        this.isPack = isPack;
-    }
     public List<String> getPackItems() {
         return packItems;
     }
     public void setPackItems(List<String> packItems) {
         this.packItems = packItems;
+    }
+    public ItemType getItemType() {
+        return itemType;
+    }
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
+    }
+    public UUID getId() {
+        return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

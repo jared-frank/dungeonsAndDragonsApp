@@ -2,11 +2,12 @@ package com.dungeonsproject.characterdata;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Inventory {
-    private Map<String, InventoryItem> items;
+    private Map<UUID, InventoryItem> items;
     
-    Inventory(Map<String,InventoryItem> items) {
+    Inventory(Map<UUID,InventoryItem> items) {
         this.items = items;
     }
 
@@ -14,15 +15,15 @@ public class Inventory {
         this.items = new HashMap<>();
     }
 
-    public Map<String, InventoryItem> getInventory() {
+    public Map<UUID, InventoryItem> getInventory() {
         return items;
     }
 
     public void addToInventory(InventoryItem item) {
-        items.put(item.getName() ,item);
+        items.put(item.getId() ,item);
     }
 
     public void removeFromInventory(InventoryItem item) {
-        items.remove(item.getName());
+        items.remove(item.getId());
     }
 }

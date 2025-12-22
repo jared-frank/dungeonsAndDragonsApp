@@ -1,14 +1,27 @@
 {
-    "items": {
-        "Crossbow, light": {
+    "items": [
+        {
+            "name": "Mace",
+            "itemType": "HANDHELD",
+            "slotsUsed": 1
+        },
+        {
             "name": "Crossbow, light",
-            "slotsUsed": 1,
+            "itemType": "HANDHELD",
+            "slotsUsed": 2,
             "isBundle": false,
             "isPack": false
         },
-        "Priest's Pack": {
+        {
+            "name": "Crossbow, light",
+            "itemType": "HANDHELD",
+            "slotsUsed": 2,
+            "isBundle": false,
+            "isPack": false
+        },
+        {
             "name": "Priest's Pack",
-            "isPack": true,
+            "itemType": "PACK",
             "isBundle": false,
             "packItems":[
                 "Backpack",
@@ -22,5 +35,5 @@
                 "Waterskin"
             ]
         }
-    }  
+    ]
 }
