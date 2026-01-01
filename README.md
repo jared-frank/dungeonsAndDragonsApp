@@ -78,15 +78,6 @@ TODO
 
 ---
 
-## Resume-Relevant Skills Demonstrated
-- Object-oriented design and domain modeling
-- UI state management
-- Drag-and-drop interactions
-- Rule validation and constraint enforcement
-- Iterative debugging and feature expansion
-
----
-
 ## Author
 **Jared Frank**  
 Portfolio project demonstrating desktop application development and UI architecture
