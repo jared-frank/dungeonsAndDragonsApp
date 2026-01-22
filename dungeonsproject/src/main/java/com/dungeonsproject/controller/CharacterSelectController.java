@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import com.dungeonsproject.App;
 import com.dungeonsproject.characterdata.CharacterSheet;
-import com.dungeonsproject.characterdata.CharacterStorage;
 import com.dungeonsproject.characterdata.CharacterSummary;
 import com.dungeonsproject.characterdata.Inventory;
+import com.dungeonsproject.characterdata.jsonStorage.CharacterStorage;
 import com.dungeonsproject.gamecontext.GameContext;
 
 import javafx.collections.FXCollections;

@@ -12,13 +12,20 @@
     <!-- LEFT: Inventory List -->
     <left>
         <ScrollPane fitToWidth="true">
-            <VBox fx:id="inventoryListContainer" spacing="10" padding="10"/>
+            <VBox fx:id="inventoryListContainer" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </VBox>
         </ScrollPane>
     </left>
 
     <!-- CENTER: Dynamic Add Item Panel -->
     <center>
-        <VBox spacing="15" padding="20">
+        <VBox spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
 
             <Label text="Add Item" style="-fx-font-size: 20px;"/>
 
@@ -35,7 +42,10 @@
 
     <!-- BOTTOM: Equipped Items -->
     <bottom>
-        <HBox spacing="60" alignment="CENTER" padding="20">
+        <HBox spacing="60" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
 
             <VBox fx:id="armorSlot" alignment="CENTER" spacing="10">
                 <Label text="Armor Slot"/>

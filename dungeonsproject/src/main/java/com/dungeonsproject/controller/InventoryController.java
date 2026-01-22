@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.dungeonsproject.characterdata.EquipmentSlot;
-import com.dungeonsproject.characterdata.InventoryItem;
-import com.dungeonsproject.characterdata.ItemType;
+import com.dungeonsproject.characterdata.inventoryItems.InventoryItem.ItemType;
+import com.dungeonsproject.characterdata.inventoryItems.InventoryItem;
 import com.dungeonsproject.gamecontext.GameContext;
 
 import javafx.fxml.FXML;
@@ -29,6 +29,7 @@ public class InventoryController {
 
     @FXML 
     private ComboBox<ItemType> itemTypeCombo;
+    private ItemType currenItemType;
 
     @FXML 
     private VBox dynamicInputArea;
@@ -50,6 +51,7 @@ public class InventoryController {
 
         itemTypeCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
             buildDynamicInputs(newVal);
+            currenItemType = newVal;
         });
 
         setupDropZone(armorSlot, EquipmentSlot.ARMOR);
@@ -168,10 +170,31 @@ public class InventoryController {
         });
     }
 
-
     @FXML
     private void handleAddItem() {
+        if (currenItemType != null) {
+            InventoryItem newItem;
 
+            switch (currenItemType) {
+                case HANDHELD -> {
+                    //newItem = new HandheldItem();
+                }
+                case PACK -> {
+                    //newItem = new PackItem();
+                }
+                case BUNDLE -> {
+                    //newItem = new BundleItem();
+                }
+                case ARMOR -> {
+                    //newItem = new ArmorItem();
+                }
+            } 
+            
+            
+        } else {
+            return;
+        }
+        
     }
 
     private void populateInventory() {
@@ -212,7 +235,6 @@ public class InventoryController {
         };
     }   
 
-
     private void removeItemFromInventoryUI(String id) {
 
         Node toRemove = null;
@@ -243,7 +265,6 @@ public class InventoryController {
             e.consume();
         });
     }
-
 
     private void setupInventoryReturnZone() {
 
@@ -291,7 +312,6 @@ public class InventoryController {
         return false;
     }
 
-
     private void clearSlotIfContains(VBox slot, String id, String slotName) {
         if (slot.getChildren().isEmpty()) return;
 
@@ -319,4 +339,3 @@ public class InventoryController {
     }
 
 }
-

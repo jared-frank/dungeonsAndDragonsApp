@@ -1,6 +1,8 @@
-package com.dungeonsproject.characterdata;
+package com.dungeonsproject.characterdata.jsonStorage;
 
 import java.util.List;
+
+import com.dungeonsproject.characterdata.inventoryItems.InventoryItem;
 
 public class InventoryStorageModel {
     List<InventoryItem> items;

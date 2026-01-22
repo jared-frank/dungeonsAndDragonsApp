@@ -1,4 +1,4 @@
-package com.dungeonsproject.characterdata;
+package com.dungeonsproject.characterdata.jsonStorage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.dungeonsproject.characterdata.CharacterSheet;
+import com.dungeonsproject.characterdata.CharacterSummary;
+import com.dungeonsproject.characterdata.Inventory;
+import com.dungeonsproject.characterdata.inventoryItems.InventoryItem;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class CharacterStorage {
 
@@ -22,7 +27,7 @@ public class CharacterStorage {
     }
 
     public CharacterSheet loadStats(String characterPath) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = buildGson();
         try (FileReader reader = new FileReader(characterPath + "/character.json")) {
             CharacterSheet sheet = gson.fromJson(reader, CharacterSheet.class);
             return sheet;
@@ -43,20 +48,21 @@ public class CharacterStorage {
             return null;
         }
 
-        for (File folder : characterFolders) {
-            Gson gson = new Gson();
+        Gson gson = buildGson();
 
+        for (File folder : characterFolders) {
             try (FileReader reader = new FileReader(folder.getPath() + "/character.json")) {
                 CharacterSummary summary = gson.fromJson(reader, CharacterSummary.class);
                 summary.setFilePath(folder.getPath());
                 summaries.add(summary);
             }
         }
+
         return summaries;
     }
 
     public Inventory loadInventory(String characterPath) throws IOException{
-        Gson gson = new Gson();
+        Gson gson = buildGson();
         
         try (FileReader reader = new FileReader(characterPath + "/inventory.json")) {
             InventoryStorageModel inventoryModel = gson.fromJson(reader, InventoryStorageModel.class);
@@ -64,8 +70,7 @@ public class CharacterStorage {
             Inventory inventory = new Inventory();
 
             for (InventoryItem item : inventoryModel.getItems()) {
-                UUID itemId = UUID.randomUUID();
-                item.setId(itemId);
+                item.setId(UUID.randomUUID());
                 inventory.addToInventory(item);
             }
 
@@ -82,5 +87,13 @@ public class CharacterStorage {
             writer.write(json);
         }
     }
-    
+
+    private Gson buildGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(
+                    InventoryItem.class,
+                    new InventoryItemDeserializer()
+                )
+                .create();
+    }
 }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import com.dungeonsproject.characterdata.CharacterStorage;
+import com.dungeonsproject.characterdata.jsonStorage.CharacterStorage;
 import com.dungeonsproject.gamecontext.GameContext;
 
 public class App extends Application {

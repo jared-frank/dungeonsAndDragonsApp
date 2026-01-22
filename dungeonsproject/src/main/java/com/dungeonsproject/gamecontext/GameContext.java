@@ -2,7 +2,7 @@ package com.dungeonsproject.gamecontext;
 
 import com.dungeonsproject.characterdata.CharacterSheet;
 import com.dungeonsproject.characterdata.Inventory;
-import com.dungeonsproject.characterdata.InventoryItem;
+import com.dungeonsproject.characterdata.inventoryItems.InventoryItem;
 
 public class GameContext {
 
